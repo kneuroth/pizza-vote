@@ -1,5 +1,6 @@
 package com.kneuroth.pizza_vote.computed.results;
 
+import com.kneuroth.pizza_vote.data.entry.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,14 @@ public class ResultsController {
             year = Calendar.getInstance().get(Calendar.YEAR);
         }
         return resultsLogic.buildEntryVotes(year);
+    }
+
+    @GetMapping()
+    public Entry getScottResults(@RequestParam(value="year", required = false, defaultValue = "0") int year) {
+        if (year == 0) {
+            year = Calendar.getInstance().get(Calendar.YEAR);
+        }
+        return resultsLogic.getScottWinner(year);
     }
 
 }
