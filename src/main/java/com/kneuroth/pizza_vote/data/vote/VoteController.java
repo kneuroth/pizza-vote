@@ -1,9 +1,11 @@
 package com.kneuroth.pizza_vote.data.vote;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,18 @@ import java.util.List;
 @RequestMapping("/votes")
 public class VoteController {
 
+    @Autowired
+    VoteService voteService;
+
     @GetMapping
-    public List<Vote> get(){
-        return new ArrayList<Vote>();
+    public ResponseEntity<List<Vote>> get() throws SQLException {
+        List<Vote> votes = voteService.getVotes();
+        return ResponseEntity.status(HttpStatus.OK).body(votes);
+    }
+
+    @PostMapping
+    public ResponseEntity<Integer> post(@RequestBody Vote vote) throws SQLException {
+        int savedVoteCount = voteService.castVote(vote);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedVoteCount);
     }
 }

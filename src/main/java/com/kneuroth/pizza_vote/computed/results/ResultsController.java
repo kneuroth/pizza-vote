@@ -22,7 +22,7 @@ public class ResultsController {
         return resultsLogic.buildEntryVotes(year);
     }
 
-    @GetMapping()
+    @GetMapping("scott")
     public Entry getScottResults(@RequestParam(value="year", required = false, defaultValue = "0") int year) {
         if (year == 0) {
             year = Calendar.getInstance().get(Calendar.YEAR);
