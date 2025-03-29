@@ -17,12 +17,17 @@ public class VoteService {
 
     @Autowired
     DataSource dataSource;
+
     public List<Vote> getVotes() throws SQLException {
         return voteDao.getAll();
     }
 
-    public int castVote(Vote vote) throws SQLException {
+    public int castVote(VoteRequest voteRequest) throws SQLException {
         // TODO: Check if vote is ok
-        return voteDao.save(vote);
+        return voteDao.save(voteRequest);
+    }
+
+    public int deleteVote(int id) throws SQLException {
+        return voteDao.delete(id);
     }
 }

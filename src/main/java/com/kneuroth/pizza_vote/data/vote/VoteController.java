@@ -23,8 +23,14 @@ public class VoteController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> post(@RequestBody Vote vote) throws SQLException {
-        int savedVoteCount = voteService.castVote(vote);
+    public ResponseEntity<Integer> post(@RequestBody VoteRequest voteRequest) throws SQLException {
+        int savedVoteCount = voteService.castVote(voteRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedVoteCount);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@RequestParam(value="id") int id) throws SQLException {
+        voteService.deleteVote(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

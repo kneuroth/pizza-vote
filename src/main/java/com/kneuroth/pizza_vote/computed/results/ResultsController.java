@@ -4,6 +4,7 @@ import com.kneuroth.pizza_vote.data.entry.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class ResultsController {
     private ResultsLogic resultsLogic;
 
     @GetMapping()
-    public List<EntryVotes> getYearResults(@RequestParam(value="year", required=false, defaultValue="0") int year) {
+    public List<Results> getYearResults(@RequestParam(value="year", required=false, defaultValue="0") int year) throws SQLException {
         if (year == 0) {
             year = Calendar.getInstance().get(Calendar.YEAR);
         }

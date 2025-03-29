@@ -26,12 +26,22 @@ public class VoteDao {
         return votes;
     }
 
-    public int save(Vote vote) throws SQLException {
+    public int save(VoteRequest voteRequest) throws SQLException {
         Connection conn = dataSource.getConnection();
         String sql = "INSERT INTO PUBLIC.votes (NAME, ENTRYID) VALUES (?, ?)";
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, vote.name());
-        statement.setInt(2, vote.entryId());
+        statement.setString(1, voteRequest.name());
+        statement.setInt(2, voteRequest.entryId());
+        int updatedRecordCount = statement.executeUpdate();
+        conn.commit();
+        return updatedRecordCount;
+    }
+
+    public int delete(int id) throws SQLException {
+        Connection conn = dataSource.getConnection();
+        String sql = "DELETE FROM PUBLIC.votes WHERE ID = ?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, id);
         int updatedRecordCount = statement.executeUpdate();
         conn.commit();
         return updatedRecordCount;
