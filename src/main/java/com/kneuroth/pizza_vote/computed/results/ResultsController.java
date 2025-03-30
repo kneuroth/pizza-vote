@@ -24,7 +24,7 @@ public class ResultsController {
     }
 
     @GetMapping("scott")
-    public Entry getScottResults(@RequestParam(value="year", required = false, defaultValue = "0") int year) {
+    public List<Entry> getScottResults(@RequestParam(value="year", required = false, defaultValue = "0") int year) throws SQLException {
         if (year == 0) {
             year = Calendar.getInstance().get(Calendar.YEAR);
         }

@@ -17,27 +17,29 @@ public class EntryDao {
     DataSource dataSource;
 
     public List<Entry> getAll() throws SQLException {
-        Connection conn = dataSource.getConnection();
-        Statement statement = conn.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * FROM PUBLIC.entries;");
-        List<Entry> entries = new ArrayList<Entry>();
-        while (rs.next()) {
-            Entry entry = new Entry(rs.getInt("id"), rs.getString("name"), rs.getString("creator"), rs.getInt("pizzaYear"));
-            entries.add(entry);
+        String sql = "SELECT * FROM PUBLIC.entries;";
+        try (Connection conn = dataSource.getConnection();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(sql);) {
+            List<Entry> entries = new ArrayList<Entry>();
+            while (rs.next()) {
+                Entry entry = new Entry(rs.getInt("id"), rs.getString("name"), rs.getString("creator"), rs.getInt("pizzaYear"));
+                entries.add(entry);
+            }
+            return entries;
         }
-        return entries;
     }
 
     public int save(EntryRequest entryRequest) throws SQLException {
-        Connection conn = dataSource.getConnection();
         String sql = "INSERT INTO PUBLIC.entries (NAME, CREATOR, PIZZAYEAR) VALUES (?, ?, ?)";
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, entryRequest.name());
-        statement.setString(2, entryRequest.creator());
-        statement.setInt(3, entryRequest.year());
-        int updatedRecordCount = statement.executeUpdate();
-        conn.commit();
-        return updatedRecordCount;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql);) {
+            statement.setString(1, entryRequest.name());
+            statement.setString(2, entryRequest.creator());
+            statement.setInt(3, entryRequest.year());
+
+            return statement.executeUpdate();
+        }
     }
 
 }

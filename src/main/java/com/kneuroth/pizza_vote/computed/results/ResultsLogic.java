@@ -25,7 +25,7 @@ public class ResultsLogic {
         return resultsDao.getResults(year);
     }
 
-    public Entry getScottWinner(int year) {
-        return new Entry(1, "Best pizza", "Kelly", 1);
+    public List<Entry> getScottWinner(int year) throws SQLException {
+        return resultsDao.getScottResults(year);
     }
 }
