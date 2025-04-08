@@ -12,13 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/entries")
+@CrossOrigin(origins = "https://kneuroth.github.io")
 public class EntryController {
 
     @Autowired
     EntryService entryService;
 
     @GetMapping
-    public  ResponseEntity<List<Entry>> getEntries() throws SQLException {
+    public ResponseEntity<List<Entry>> getEntries() throws SQLException {
         List<Entry> votes = entryService.getEntries();
         return ResponseEntity.status(HttpStatus.OK).body(votes);
     }

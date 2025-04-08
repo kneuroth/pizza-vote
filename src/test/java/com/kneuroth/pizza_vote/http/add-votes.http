@@ -1,0 +1,26 @@
+###
+POST http://localhost:8080/votes
+Content-Type: application/json
+
+{
+  "name": "Kelly",
+  "entryId": 1
+}
+
+###
+POST http://localhost:8080/votes
+Content-Type: application/json
+
+{
+  "name": "Matt",
+  "entryId": 1
+}
+
+###
+POST http://localhost:8080/votes
+Content-Type: application/json
+
+{
+  "name": "Heather",
+  "entryId": 2
+}

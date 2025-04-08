@@ -1,0 +1,30 @@
+POST http://localhost:8080/entries
+Content-Type: application/json
+
+{
+  "name": "Freak cheese accident",
+  "creator": "Bug",
+  "year": 2025
+}
+
+###
+POST http://localhost:8080/entries
+Content-Type: application/json
+
+{
+  "name": "Pepperoni Dream",
+  "creator": "Matt",
+  "year": 2025
+}
+
+###
+POST http://localhost:8080/entries
+Content-Type: application/json
+
+{
+  "name": "Pie O Mine",
+  "creator": "Kelly",
+  "year": 2025
+}
+
+###
