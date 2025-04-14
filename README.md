@@ -14,7 +14,7 @@ gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/your-app
 ## Deploy Image to a Service
 
 - When you want to deploy, create a Service and choose the latest image for your-app
-- You'll need to provide a few Container Arguments which are injected at the Entrypoint in your Dockerfile:
+- You'll need to provide a few environment variables to be set in the container once it's running:
 - These will map to variables in application.properties or are expected by Spring
     - Spring Env Variables - Environment variables that Spring expects
         - SPRING_PROFILES_ACTIVE = prod
