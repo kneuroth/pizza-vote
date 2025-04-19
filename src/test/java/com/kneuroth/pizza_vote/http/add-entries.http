@@ -28,3 +28,10 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/entries
+Content-Type: application/json
+
+{
+  "name": "No year za",
+  "creator": "Jimmy"
+}

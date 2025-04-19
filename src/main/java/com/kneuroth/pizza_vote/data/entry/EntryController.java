@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,12 @@ public class EntryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Integer> addEntry(@RequestBody EntryRequest entryRequest) throws SQLException {
-        int savedEntryCount = entryService.addEntry(entryRequest);
+        Integer year = entryRequest.year();
+        EntryRequest entry = new EntryRequest(
+                entryRequest.name(),
+                entryRequest.creator(),
+                (year != null && year != 0) ? entryRequest.year() : LocalDate.now().getYear());
+        int savedEntryCount = entryService.addEntry(entry);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntryCount);
     }
 
