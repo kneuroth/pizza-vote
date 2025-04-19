@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/entries")
@@ -28,11 +29,16 @@ public class EntryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Integer> addEntry(@RequestBody EntryRequest entryRequest) throws SQLException {
+        String name = entryRequest.name();
+        String creator = entryRequest.creator();
+        if (Objects.equals(name, "") || Objects.equals(creator, "")) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         Integer year = entryRequest.year();
         EntryRequest entry = new EntryRequest(
-                entryRequest.name(),
-                entryRequest.creator(),
-                (year != null && year != 0) ? entryRequest.year() : LocalDate.now().getYear());
+                name,
+                creator,
+                (year != null && year != 0) ? year : LocalDate.now().getYear());
         int savedEntryCount = entryService.addEntry(entry);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntryCount);
     }
