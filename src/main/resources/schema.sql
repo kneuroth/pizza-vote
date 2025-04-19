@@ -4,7 +4,6 @@ CREATE TABLE entries
     name      varchar(255) NOT NULL,
     creator   varchar(255) NOT NULL,
     pizzaYear int          NOT NULL,
-    PRIMARY KEY (id)
 );
 
 CREATE TABLE votes
@@ -12,7 +11,6 @@ CREATE TABLE votes
     id      int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name    varchar(255) NOT NULL,
     entryId int          NOT NULL,
-    PRIMARY KEY (id),
     FOREIGN KEY (entryId) REFERENCES entries (id)
 );
 
