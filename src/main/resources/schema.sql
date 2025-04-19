@@ -1,4 +1,4 @@
-CREATE TABLE entries
+CREATE TABLE IF NOT EXISTS entries
 (
     id        int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name      varchar(255) NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE entries
     pizzaYear int          NOT NULL
 );
 
-CREATE TABLE votes
+CREATE TABLE IF NOT EXISTS votes
 (
     id      int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name    varchar(255) NOT NULL,
