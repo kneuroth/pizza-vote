@@ -3,13 +3,14 @@
 ### Push Image to Registry
 
 ```
+# Build the project / create the .jar
+mvn clean package 
+
 gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/your-app
 ```
 
 - The YOUR_PROJECT_ID can be found in the top nav bar of the Google Cloud Console
 -
-
-")
 
 ## Deploy Image to a Service
 
