@@ -1,11 +1,18 @@
 ## Deploying
 
+When doing anything with the gcloud CLI, remember to switch your project to the correct gcloud project
+
+```
+gcloud config set project YOUR_PROJECT_ID
+```
+
 ### Push Image to Registry
 
 ```
 # Build the project / create the .jar
 mvn clean package 
 
+# Run from the directory that your Dockerfile is in
 gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/your-app
 ```
 
